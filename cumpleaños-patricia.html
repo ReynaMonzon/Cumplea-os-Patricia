@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños, Mi Princesa Patricia</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #FFD1DC;
+            color: #333;
+            text-align: center;
+        }
+
+        #main-message {
+            font-size: 2em;
+            color: #D7263D;
+            margin: 50px 20px;
+        }
+
+        #hearts-border {
+            border: 3px dashed #ff5a5f;
+            padding: 20px;
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+        }
+
+        #hearts-border::before {
+            content: "apreta aquí";
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1em;
+            background-color: #FFD1DC;
+            padding: 5px 10px;
+            border-radius: 20px;
+            color: #D7263D;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #poems {
+            font-size: 1.5em;
+            color: #FF6F61;
+            margin: 30px 20px;
+        }
+
+        .heart-rain {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #FF6F61;
+            clip-path: polygon(50% 0%, 100% 38%, 81% 100%, 50% 81%, 19% 100%, 0% 38%);
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        #final-message {
+            font-size: 1.8em;
+            color: #FFD700;
+            margin: 50px 20px;
+        }
+
+        #sister-message {
+            font-size: 1.5em;
+            color: #FF8C00;
+            margin: 50px 20px;
+        }
+
+        #love-message {
+            font-size: 1.2em;
+            color: #C71585;
+            margin: 20px;
+            cursor: pointer;
+        }
+
+        #love-message.clicked {
+            font-size: 3em;
+        }
+    </style>
+</head>
+<body>
+    <div id="main-message">Feliz cumpleaños mi princesa Patricia</div>
+    <div id="hearts-border" onclick="showPoemsAndHearts()">❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️</div>
+
+    <div id="poems" class="hidden">
+        <p>Un día más contigo, un día más para amarte,</p>
+        <p>En cada latido, mi corazón solo quiere abrazarte.</p>
+        <p>Eres la luz de mi vida, mi amor, mi estrella,</p>
+        <p>Feliz cumpleaños, mi querida doncella.</p>
+    </div>
+
+    <div id="final-message" class="hidden">Muéstrale esto a mi cuñadita.</div>
+    <div id="sister-message" class="hidden">¡Feliz cumpleaños, cuñadita! Que tu día esté lleno de alegría, color, y diversión.</div>
+
+    <div id="love-message" class="hidden" onclick="expandLove()">TE AMO</div>
+
+    <script>
+        function showPoemsAndHearts() {
+            document.getElementById('poems').classList.remove('hidden');
+            createHeartRain();
+            setTimeout(showFinalMessage, 5000);
+        }
+
+        function showFinalMessage() {
+            document.getElementById('final-message').classList.remove('hidden');
+            setTimeout(showSisterMessage, 3000);
+        }
+
+        function showSisterMessage() {
+            document.getElementById('sister-message').classList.remove('hidden');
+            document.getElementById('love-message').classList.remove('hidden');
+        }
+
+        function expandLove() {
+            let loveMessage = document.getElementById('love-message');
+            loveMessage.classList.add('clicked');
+        }
+
+        function createHeartRain() {
+            const heartRainContainer = document.createElement('div');
+            heartRainContainer.classList.add('heart-rain');
+            document.body.appendChild(heartRainContainer);
+
+            for (let i = 0; i < 50; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = 3 + Math.random() * 2 + 's';
+                heartRainContainer.appendChild(heart);
+            }
+        }
+    </script>
+</body>
+</html>
